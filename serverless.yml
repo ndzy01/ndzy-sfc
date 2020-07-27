@@ -9,7 +9,7 @@ inputs:
     src: ./
     exclude:
       - .env
-  region: ap-guangzhou
+  region: ap-chengdu
   runtime: Nodejs10.15
   apigatewayConf:
     protocols:
