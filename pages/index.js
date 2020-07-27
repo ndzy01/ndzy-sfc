@@ -1,33 +1,48 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
-const Home = () => (
-  <div className="container">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+export async function getStaticProps() {
+  const res = await fetch(process.env.BASEURL + '/test');
+  const posts = await res.json();
 
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+  return {
+    props: {
+      posts
+    }
+  };
+}
 
-      <p className="description">
-        Get started by editing <code>pages/index.js</code>
-      </p>
-    </main>
+const Home = ({ posts }) => {
+  console.log(posts);
 
-    <footer>
-      <a
-        href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-      </a>
-    </footer>
-  </div>
-)
+  return (
+    <div className="container">
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-export default Home
+      <main>
+        <h1 className="title">
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
+
+        <p className="description">
+          Get started by editing <code>pages/index.js</code>
+        </p>
+      </main>
+
+      <footer>
+        <a
+          href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
+        </a>
+      </footer>
+    </div>
+  );
+};
+
+export default Home;
